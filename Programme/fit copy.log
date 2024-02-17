@@ -1,0 +1,174 @@
+
+
+*******************************************************************************
+Wed Dec 21 18:10:28 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [0.00000 : 1000.00]
+        #datapoints = 1000
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x)=a*exp(b*x)
+fitted parameters initialized with current variable values
+
+
+Current data point
+=========================
+#               = 711 out of 1000
+x               = 1              
+z               = 4.16589        
+
+Current set of parameters
+=========================
+a               = 1              
+b               = 1              
+
+BREAK: Function evaluation yields NaN ("not a number")
+
+*******************************************************************************
+Wed Dec 21 18:14:35 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [-100.000 : 900.000]
+        #datapoints = 901
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x)=a*x
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a            
+   0 2.4018770929e+08   0.00e+00  5.20e+02    1.000000e+00
+   3 3.4097670166e+03  -1.07e-06  5.20e-01    6.638267e-03
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 3409.77
+rel. change during last iteration : -1.06648e-11
+
+degrees of freedom    (FIT_NDF)                        : 900
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.94644
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.78863
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 0.00663827       +/- 0.0001248    (1.879%)
+
+
+*******************************************************************************
+Wed Dec 21 18:16:14 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [1200.00 : 2200.00]
+BREAK: No data to fit
+
+*******************************************************************************
+Wed Dec 21 18:22:16 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [* : 80.0000]
+        #datapoints = 81
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x^b
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Wed Dec 21 18:22:32 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [1.00000 : 80.0000]
+        #datapoints = 80
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*x^b
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Wed Dec 21 18:25:07 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [1.00000 : 80.0000]
+        #datapoints = 80
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*(x**b)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 1.4937697773e+05   0.00e+00  1.38e+02    1.000000e+00   1.000000e+00
+   7 2.7555856837e+00  -1.09e-01  1.38e-05    2.292164e+00   1.416552e-01
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 2.75559
+rel. change during last iteration : -1.08577e-06
+
+degrees of freedom    (FIT_NDF)                        : 78
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.187957
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.035328
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.29216          +/- 0.06251      (2.727%)
+b               = 0.141655         +/- 0.00738      (5.21%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.979  1.000 
+
+
+*******************************************************************************
+Wed Dec 21 18:25:55 2022
+
+
+FIT:    data read from "rough50.dat" using 1:4
+        format = x:z
+        x range restricted to [1.00000 : 50.0000]
+        #datapoints = 50
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a*(x**b)
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a             b            
+   0 1.3828173840e+00   0.00e+00  2.75e+00    2.292164e+00   1.416552e-01
+   4 2.1452541733e-01  -3.31e-03  2.75e-04    2.002464e+00   1.913219e-01
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.214525
+rel. change during last iteration : -3.30933e-08
+
+degrees of freedom    (FIT_NDF)                        : 48
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0668527
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00446928
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 2.00246          +/- 0.0246       (1.228%)
+b               = 0.191322         +/- 0.003743     (1.956%)
+
+correlation matrix of the fit parameters:
+                a      b      
+a               1.000 
+b              -0.977  1.000 

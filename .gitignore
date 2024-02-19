@@ -1,3 +1,8 @@
 # Ignore .exe files
 *.exe
 *.s
+exercise_1/output_image.png
+exercise_1/output_v2
+*.out
+exercise_1/charge_main_fragment_v2
+exercise_1/cmf2

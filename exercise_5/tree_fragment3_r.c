@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h> // for srand (random seed)
+#include <math.h> // for fabs (absolute value for double)
 
 /* data structures for tree elements */
 struct node_struct
@@ -150,6 +152,21 @@ void print_tree_indent(node_t *tree, int level)
     print_tree_indent(tree->right, level+1);
   }
 }
+
+void print_tree_indent_clear(node_t *tree, int level, char* direction)
+{
+  int t;
+  if(tree != NULL)
+  {
+    print_tree_indent_clear(tree->left, level+1, "L");
+    for(t=0; t<level; t++)
+      printf("  ");
+    if(level > 0) // if not root
+      printf("|-%s-", direction);
+    printf("%d\n", tree->info);
+    print_tree_indent_clear(tree->right, level+1, "R");
+  }
+}
 /********************* count_leaves() *****************/
 /** Caluclates number of leaves recursively.         **/
 /** PARAMETERS: (*)= return-paramter                 **/
@@ -159,7 +176,6 @@ void print_tree_indent(node_t *tree, int level)
 /******************************************************/
 int count_leaves(node_t *tree)
 {
-  // TODO:1 Complete the function to count the number of leaves in the tree
   if (tree == NULL) {
     return 0; // empty tree (no leaves)
   } else if (tree->left == NULL && tree->right == NULL) {
@@ -216,7 +232,6 @@ node_t *remove_value(node_t *tree, int value, node_t **node_p)
   if( (current->left != NULL)&&(current->right != NULL)) // Node has 2 children
   {
     /* search smallest val. in right subtree, adjust pred as well! , exchange values */
-    // TODO: HERE
     next = current->right; // look at right subtree of current node
     pred = current; // set pred to current node
     while(next->left != NULL) // keep looking at left subtree of next node and update pred and next  
@@ -236,7 +251,6 @@ node_t *remove_value(node_t *tree, int value, node_t **node_p)
   {
     /** COMPLETE **/
     /* return new root */
-    // TODO: HERE
     if(current->left != NULL) // if left child exists, set it as new root, otherwise set right child as new root
       tree = current->left;
     else
@@ -247,7 +261,6 @@ node_t *remove_value(node_t *tree, int value, node_t **node_p)
   {
     /** COMPLETE **/
     /* treat standard case */
-    // TODO: HERE
     if (pred->left == current) { // if current node is left child of pred
       if (current->left != NULL) {
         pred->left = current->left; // reemplace current node with left child
@@ -266,8 +279,87 @@ node_t *remove_value(node_t *tree, int value, node_t **node_p)
   return(tree);
 }
 
+// TODO: 1
+// Knuth's algorithm for estimating the number of leaves in a binary tree
+int knuth(node_t *tree) {
+    int b = 1; // Estimate at root node
+    while (tree != NULL) {
+        if (tree->left != NULL && tree->right != NULL) { // If 2 children, double b and choose random direction.
+            b = 2 * b;
+            // choose left or right successor with same probability
+            if (drand48() < 0.5) { // drand48() returns a random number between 0 and 1, with uniform distribution
+                tree = tree->left;
+            } else {
+                tree = tree->right;
+            }
+        } else if (tree->left != NULL) { // Move to successor if only one child without increasing b.
+            tree = tree->left;
+        } else if (tree->right != NULL) {
+            tree = tree->right;
+        } else {
+            break;
+        }
+    }
+    return b;
+}
 
+// TODO: 2
+// Show by recursion that the expectation value <b> = number of leaves in the tree
+void test_knuth(node_t *tree, int num_runs) {
+  int b = 0;
+  for (int i = 0; i < num_runs; i++) {
+    b += knuth(tree);
+  }
+  double average = (double)b / num_runs;
+  int actual = count_leaves(tree);
+  printf("Average estimate of number of leaves over %d runs: %f\n", num_runs, average);
+  printf("Actual number of leaves: %d\n", actual);
+}
 
+// TODO: 3
+// Function to test the number of runs needed until convergence
+void test_knuth_simple(node_t *tree) {
+  int b = 0;
+  int num_runs = 0;
+  double average = 0;
+  int actual = count_leaves(tree);
+  double tolerance = 0.01; // Tolerance
+  double error = 0;
+
+  remove("output.txt"); // Remove file if it exists
+
+  // Open a file in write mode.
+  FILE *file = fopen("output.txt", "a");
+  if (file == NULL) {
+    printf("Error opening file!\n");
+    return;
+  }
+
+  do { // Need to run it at least once to update average value
+    
+    b += knuth(tree);
+    num_runs++;
+    average = (double)b / num_runs; // Added missing semicolon here
+    error = fabs(average - actual); // Need math.h for fabs, ab
+
+    // Write the values of num_runs and error to the file.
+    fprintf(file, "num_runs: %d, error: %f\n", num_runs, error);
+  } while (num_runs < 10000000 && error > tolerance);
+
+  // Close the file.
+  fclose(file);
+}
+
+// TODO: 4
+// Create a random tree with N nodes
+void create_random_tree(node_t *tree, int N) {
+  srand(time(NULL)); // seed for random number generator
+  for (int i = 0; i < N; i++) {
+    int value = rand() % 100; // random number between 0 and 99
+    node_t *node = create_node(value);
+    tree = insert_node(tree, node);
+  }
+}
 
 int main(int argc, char *argv[])
 {
@@ -300,7 +392,7 @@ int main(int argc, char *argv[])
 
   printf("%d leaves\n", count_leaves(tree));
 
-  print_tree_indent(tree, 0); printf("\n");
+  print_tree_indent(tree,0); printf("\n");
   value = 40;
   printf("rem: %d\n", value);
   tree = remove_value(tree, value, &node);
@@ -315,6 +407,24 @@ int main(int argc, char *argv[])
   printf("rem: %d\n", value);
   tree = remove_value(tree, value, &node);
   print_tree_indent(tree,0); printf("\n");
+
+  // TODO:
+  // Knuth's algorithm for estimating the number of leaves in a binary tree
+  printf("Knuth's estimation: %d leaves\n", knuth(tree));
+
+  // Test Knuth's algorithm
+  int num_runs = atoi(argv[1]); // number of runs input from cl argument
+  test_knuth(tree, num_runs);
+
+  //Generate random tree and print it
+  int N = atoi(argv[2]); // number of nodes input from cl argument
+  create_random_tree(tree, N);
+  printf("Random tree with %d nodes\n", N);
+  // print_tree_indent_clear(tree, 0, "");
+  print_tree(tree);
+
+  // Test the number of runs needed until convergence for random tree
+  test_knuth_simple(tree);
 
   return(0);
 }

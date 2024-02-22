@@ -10,3 +10,4 @@ other/Programme/.DS_Store
 other/Programme/archive_filelist.csv
 Computational_Physics.code-workspace
 exercise_5/output.txt
+exercise_5/*.dat

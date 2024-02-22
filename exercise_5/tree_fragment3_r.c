@@ -318,7 +318,7 @@ void test_knuth(node_t *tree, int num_runs) {
 
 // TODO: 3
 // Function to test the number of runs needed until convergence
-void test_knuth_simple(node_t *tree) {
+void test_knuth_simple(node_t *tree, const char* filename) {
   int b = 0;
   int num_runs = 0;
   double average = 0;
@@ -326,10 +326,10 @@ void test_knuth_simple(node_t *tree) {
   double tolerance = 0.01; // Tolerance
   double error = 0;
 
-  remove("output.txt"); // Remove file if it exists
+  remove(filename); // Remove file if it exists
 
   // Open a file in write mode.
-  FILE *file = fopen("output.txt", "a");
+  FILE *file = fopen(filename, "a");
   if (file == NULL) {
     printf("Error opening file!\n");
     return;
@@ -343,8 +343,8 @@ void test_knuth_simple(node_t *tree) {
     error = fabs(average - actual); // Need math.h for fabs, ab
 
     // Write the values of num_runs and error to the file.
-    fprintf(file, "num_runs: %d, error: %f\n", num_runs, error);
-  } while (num_runs < 10000000 && error > tolerance);
+    fprintf(file, "%d %f\n", num_runs, error);
+  } while (num_runs < 1000000 && error > tolerance);
 
   // Close the file.
   fclose(file);
@@ -353,10 +353,10 @@ void test_knuth_simple(node_t *tree) {
 // TODO: 4
 // Create a random tree with N nodes
 void create_random_tree(node_t *tree, int N) {
-  srand(time(NULL)); // seed for random number generator
+  srand48(time(NULL)); // seed for random number generator
   for (int i = 0; i < N; i++) {
-    int value = rand() % 100; // random number between 0 and 99
-    node_t *node = create_node(value);
+    double value = drand48() * 100; // random number between 0 and 99 with uniform distribution
+    node_t *node = create_node((int)value);
     tree = insert_node(tree, node);
   }
 }
@@ -424,7 +424,15 @@ int main(int argc, char *argv[])
   print_tree(tree);
 
   // Test the number of runs needed until convergence for random tree
-  test_knuth_simple(tree);
+  for (int N = 30; N <= 40; N++) {
+    char filename[20];
+    sprintf(filename, "output_%d.dat", N);
+    create_random_tree(tree, N);
+    test_knuth_simple(tree, filename);
+  }
+
+  // plot using gnuplot
+  system("gnuplot -p -e \"plot 'output.txt' with lines\"");
 
   return(0);
 }

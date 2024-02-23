@@ -61,9 +61,11 @@ int main(int argc, char *argv[]) // Input args: num_runs, lambda, N (numb of ran
   
   for(t=0; t<num_runs; t++)                               /* main loop */
   {
-    max_N = -log(rand_U(lambda))/lambda;   // Exponential distribution for first number
+    // max_N = -log(rand_U(1.0))/lambda;   // Exponential distribution for first number
+    //TODO: Uniform distribution for first number
+    max_N = rand_U(lambda);
     for(t2=0; t2<N; t2++) {
-      number = -log(rand_U(lambda))/lambda;   /* generate exp-distr. number */
+      number = rand_U(lambda)/lambda;   /* generate exp-distr. number */
       if(number > max_N) {
         max_N = number;
       }

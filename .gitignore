@@ -11,3 +11,8 @@ other/Programme/archive_filelist.csv
 Computational_Physics.code-workspace
 exercise_5/output.txt
 exercise_5/*.dat
+exercise_6/*.txt
+exercise_6/*.out
+exercise_6/*.png
+exercise_6/*.dat
+exercise_6/*.gp

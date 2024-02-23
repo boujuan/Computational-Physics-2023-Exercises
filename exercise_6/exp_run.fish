@@ -1,15 +1,15 @@
 #!/usr/bin/env fish
-# Input arguments: number of random numbers to generate and seed (a) e.g.:12351
+# Input arguments: num_runs, lambda
 
 # Define variables
-set title "Linear congruential generator histogram"
-set output_file "l_c.log"
+set title "Exponential generator histogram"
+set output_file "exp.log"
 set data_style "histogram"
-set source_file "linear_congruential.c"
-set output_program "l_c.out"
+set source_file "exponential.c"
+set output_program "exp.out"
 set X_label "Random number"
 set Y_label "Frequency"
-set plot_file "./output/l_c_plot.png"
+set plot_file "./output/exp_plot.png"
 
 # Check if two arguments are provided
 if test (count $argv) -eq 2

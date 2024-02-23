@@ -43,12 +43,13 @@ int main(int argc, char *argv[])
     I = (a*I+c)%m;                    /* linear congruential generator */
     number = (double) I/m;                    /* map to interval [0,1) */
     bin = (int) floor((number-start_histo)/delta);
-    printf("%f %f\n", number_old, number);*/   /* uncomment: correl. */
+    // printf("%f %f\n", number_old, number);   /* uncomment: correl. */
     if( (bin >= 0)&&(bin < NUM_BINS))                /* inside range ? */
        histo[bin]++;                                    /* count event */
     number_old = number;
   }
   /*return(0);*/                         /* uncomment for correlation */
+  // printf("# histogram of %d random numbers\n", num_runs);
 
   for(t=0; t<NUM_BINS; t++)              /* print normalized histogram */
       printf("%f %f\n", start_histo + (t+0.5)*delta,

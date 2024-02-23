@@ -355,11 +355,42 @@ void test_knuth_simple(node_t *tree, const char* filename) {
 void create_random_tree(node_t *tree, int N) {
   srand48(time(NULL)); // seed for random number generator
   for (int i = 0; i < N; i++) {
-    double value = drand48() * 100; // random number between 0 and 99 with uniform distribution
+    double value = drand48()*10000; // random number between 0 and 99 with uniform distribution
     node_t *node = create_node((int)value);
     tree = insert_node(tree, node);
   }
 }
+
+
+node_t *create_slow_tree(int N){
+  node_t *tree=NULL;
+  node_t *node;
+  
+  for(int i=0; i<N; i++){
+    node=create_node(2*i+1);
+    tree = insert_node(tree, node);
+    node=create_node(2*i);
+    tree = insert_node(tree, node);
+
+  }
+  
+  return tree;
+ }
+
+ // Fast tree
+node_t *create_fast_tree(int arr[], int start, int end) {
+  if (start > end)
+    return NULL;
+
+  int mid = (start + end) / 2;
+  node_t* node = create_node(arr[mid]);
+
+  node->left = create_fast_tree(arr, start, mid - 1);
+  node->right = create_fast_tree(arr, mid + 1, end);
+
+  return node;
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -424,15 +455,27 @@ int main(int argc, char *argv[])
   print_tree(tree);
 
   // Test the number of runs needed until convergence for random tree
-  for (int N = 30; N <= 40; N++) {
+  for (int N = 100; N <= 1000; N+=100) {
     char filename[20];
     sprintf(filename, "output_%d.dat", N);
     create_random_tree(tree, N);
     test_knuth_simple(tree, filename);
   }
 
+  // Create fast tree
+  int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+  tree=create_fast_tree(arr, 1, 10);
+  test_knuth(tree, 100);
+  test_knuth_simple(tree, "fast_tree.dat");
+
+  // Create slow tree
+  tree=create_slow_tree(40);
+  test_knuth(tree, 100);
+  test_knuth_simple(tree, "slow_tree.dat");
+
   // plot using gnuplot
-  system("gnuplot -p -e \"plot 'output.txt' with lines\"");
+  system("gnuplot -p -e \"set logscale y; set xlabel 'Number of iterations'; set ylabel 'Error [L-b]'; plot 'output_100.dat' with lines, 'output_200.dat' with lines, 'output_300.dat' with lines, 'output_400.dat' with lines, 'output_500.dat' with lines, 'output_600.dat' with lines, 'output_700.dat' with lines, 'output_800.dat' with lines, 'output_900.dat' with lines, 'output_1000.dat' with lines\"");
+  system("gnuplot -p -e \"set xlabel 'Number of iterations'; set ylabel 'Error [L-b]'; plot 'fast_tree.dat' with lines\"");
 
   return(0);
 }

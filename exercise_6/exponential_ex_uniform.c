@@ -18,6 +18,8 @@
 /** RETURNS:                                   **/
 /**      random number                         **/
 /************************************************/
+#include <math.h>
+
 double rand_U(double lambda) // Generates random number uniformly distributed in range [0,lambda)
 {
   double value;
@@ -33,6 +35,16 @@ double gumbell(double lambda, double x, double z0) // Gumbell distribution
   return exp(-z - exp(-z))/lambda;
 }
 
+// double uniform_density(double N, double z, double a, double b) {
+//     if (z < a || z > b) {
+//         return 0;
+//     }
+
+//     double p = 1.0 / (b - a); //pdf
+//     double P = (z - a) / (b - a);
+
+//     return N * p * pow(P, N - 1);
+// }
 
 int main(int argc, char *argv[]) // Input args: num_runs, lambda, N (numb of random numbers to generate)
 {
@@ -63,6 +75,7 @@ int main(int argc, char *argv[]) // Input args: num_runs, lambda, N (numb of ran
   {
     // max_N = -log(rand_U(1.0))/lambda;   // Exponential distribution for first number
     //TODO: Uniform distribution for first number
+    //max_N = rand_U(lambda);
     max_N = rand_U(lambda);
     for(t2=0; t2<N; t2++) {
       number = rand_U(lambda)/lambda;   /* generate exp-distr. number */

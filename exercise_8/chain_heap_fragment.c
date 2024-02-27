@@ -1,7 +1,7 @@
 /****************************************************************/
 /*** Simulates chain of hard particles                        ***/
 /*** A.K. Hartmann May 2004                                   ***/
-/*** Rechnergestütztes Wissenschaftliches Rechnen             ***/
+/*** Rechnergestï¿½tztes Wissenschaftliches Rechnen             ***/
 /*** University of Goettingen, Germany 2004                   ***/
 /****************************************************************/
 
@@ -67,7 +67,9 @@ void heap_insert(global_t *glob, event_t *event, int ev)
 
   pos = glob->heap_num++;             /* insert at end */
 
-  /** complete function here **/
+  /**TODO: complete function here **/
+  
+
 }
 
 /******************** heap_remove() ******************/

@@ -97,7 +97,7 @@ void heap_insert(global_t *glob, event_t *event, int ev)
       break;
     }
 
-    pos = father;
+    pos = father; // Move up to the parent after swapping
   }
 
   // Position of current element may have changed. Update the event's position in the heap again.

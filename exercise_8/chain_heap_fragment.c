@@ -209,7 +209,9 @@ particle_t *init_particles(global_t *glob)
     part[p].x = (double) p*glob->L/(1+glob->n);
     part[p].v = 2*drand48()-1;  /* velocities in [-1,1] */
     part[p].t = 0;
-    part[p].m = 1+(p%2)*1.4;      /* alternating masses */
+    // TODO: 2 Alternating Masses
+    // part[p].m = 1+(p%2)*0.1;      /* alternating masses ~current between 1 and 1.1 */
+    part[p].m = 1 + drand48() * 9; // Random mass in [1,10]
   }
 
   return(part);

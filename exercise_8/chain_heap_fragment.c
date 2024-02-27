@@ -63,13 +63,45 @@ typedef struct
 void heap_insert(global_t *glob, event_t *event, int ev)
 {
   int pos, father;                   /* heap positions */
-  heap_elem_t elem;          /* for exchangig elements */
+  heap_elem_t elem;          /* for exchanging elements */
 
   pos = glob->heap_num++;             /* insert at end */
 
-  /**TODO: complete function here **/
+  // TODO: 1 COMPLETE THIS FUNCTION
+  // 1. Insert new event at the end of the heap
+  // 2. Compare inserted event with parent and swap if necessary (When the parent's time is greater than the current event's time)
+  // 3. Repeat step 2 until the parent's time is not greater than the current event's time
+  // heap_elem_t has two parameters: t and event
+  // event_t has three parameters: pl, pr, and t
   
+  glob->heap[pos].event = ev;         // assign event id to the new heap element at position pos
+  glob->heap[pos].t = event[ev].t;    // assign event time
 
+  // Step 2 and 3
+  while (pos != 0)
+  {
+    father = (pos - 1) / 2;
+    /* If the parent's time is greater than the current event's time, swap them */
+    if (glob->heap[father].t > glob->heap[pos].t)
+    {
+      elem = glob->heap[father];
+      glob->heap[father] = glob->heap[pos];
+      glob->heap[pos] = elem;
+
+      /* Update the event's position in the heap */
+      event[glob->heap[pos].event].pos = pos;
+    }
+    else
+    {
+      /* If the parent's time is not greater than the current event's time, then the heap property is restored */
+      break;
+    }
+
+    pos = father;
+  }
+
+  // Update the event's position in the heap
+  event[glob->heap[pos].event].pos = pos;
 }
 
 /******************** heap_remove() ******************/

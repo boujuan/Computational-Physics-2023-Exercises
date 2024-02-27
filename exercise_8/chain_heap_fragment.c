@@ -77,30 +77,30 @@ void heap_insert(global_t *glob, event_t *event, int ev)
   glob->heap[pos].event = ev;         // assign event id to the new heap element at position pos
   glob->heap[pos].t = event[ev].t;    // assign event time
 
-  // Step 2 and 3
-  while (pos != 0)
+  // Step 2 and 3 loop
+  while (pos != 0) // Because at 0, there is no parent (root)
   {
-    father = (pos - 1) / 2;
-    /* If the parent's time is greater than the current event's time, swap them */
+    father = (pos - 1) / 2; // Calculate the parent's position
+    // If the parent's time is greater than the current event's time, swap them
     if (glob->heap[father].t > glob->heap[pos].t)
     {
-      elem = glob->heap[father];
-      glob->heap[father] = glob->heap[pos];
-      glob->heap[pos] = elem;
+      elem = glob->heap[father]; // temporal variable to store the father's element
+      glob->heap[father] = glob->heap[pos]; 
+      glob->heap[pos] = elem; // swap the father's element with the current element
 
-      /* Update the event's position in the heap */
+      // Update the event's position in the heap
       event[glob->heap[pos].event].pos = pos;
     }
     else
     {
-      /* If the parent's time is not greater than the current event's time, then the heap property is restored */
+      //Heap is in order
       break;
     }
 
     pos = father;
   }
 
-  // Update the event's position in the heap
+  // Position of current element may have changed. Update the event's position in the heap again.
   event[glob->heap[pos].event].pos = pos;
 }
 
@@ -128,7 +128,7 @@ void heap_remove(global_t *glob, event_t *event, int pos)
   }
   glob->heap[pos] =                    /* put last element at pos */
     glob->heap[--glob->heap_num];
-  father = (pos-1)/2;
+  father = (pos-1)/2; // Calculate the parent's position
   if(glob->heap[father].t > glob->heap[pos].t)
     while((pos > 0)&&                          /* move up in heap */
 	  (glob->heap[father].t > glob->heap[pos].t)) 

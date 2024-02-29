@@ -35,7 +35,6 @@ typedef struct
   int event;                     /* id of event */
 } heap_elem_t;
 
-
 /** global data of simulation **/
 typedef struct
 {
@@ -47,8 +46,6 @@ typedef struct
   int       heap_num; /*NEW*/   /* # elements of heap */
   heap_elem_t  *heap; /*NEW*/        /* stores events */
 } global_t;
-
-
 
 /******************** heap_insert() ******************/
 /** Insert event 'event[ev]' into heap 'glob->heap' **/

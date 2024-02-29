@@ -33,7 +33,7 @@
 /***************************************************************/
 void diluted_PT(int num_T, short int **spin_cfg, int num_n, int N, int *next, short int *e, double *T, int *exch, int *tries)
 {
-  int k, mc_steps = 1000; // Define the number of Monte Carlo steps
+  int k, mc_steps = 1; // Define the number of Monte Carlo steps
   double delta, r;
 
   // Perform Monte Carlo algorithm for each temperature configuration

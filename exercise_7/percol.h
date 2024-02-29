@@ -50,7 +50,7 @@ extern int *percol_init_next(int dim, int *l, int *n_p);
 extern percol_glob_t *percol_create_glob(int dim, int *l);
 extern void percol_delete_glob(percol_glob_t *glob);
 extern percol_node_t *percol_create_node(int id, percol_glob_t *glob);
-extern void percol_delete_node(percol_node_t *node);
+extern void percol_delete_node(percol_node_t *nodepercol_analysis);
 extern percol_node_t *percol_root(percol_node_t *node, int *diff,
 				  percol_glob_t *glob);
 extern percol_node_t *percol_join_trees(percol_node_t *root1, int *diff1, 
@@ -63,6 +63,7 @@ extern void percol_print_cluster(percol_node_t **node,
 
 
 /** in percol_spanning.c **/
+// TODO: 2 Exercise 1
 extern int percol_spanning(int N, int *cluster, 
 			   int cluster_ID, int x_length);
 

@@ -1,0 +1,41 @@
+This C program simulates a simple perceptron, which is a type of artificial neural network. The perceptron is a binary classifier that maps its input, a real-valued vector, to an output value using a set of weights. These weights are learned from the input data.
+
+The program includes several functions:
+
+1. `output_neuron()`: This function calculates the output of a McCulloch-Pitts neuron (a simple binary neuron model) for a given input and set of weights. It sums the product of the weights and the input values and returns 1 if the sum is greater than or equal to 0, and 0 otherwise.
+
+2. `random_vector()`: This function generates a random binary vector of a specified length. It uses the `drand48()` function to generate random numbers and assigns 1 or 0 to the vector elements based on whether the generated number is less than 0.5 or not.
+
+3. `test_majority()`: This function checks if more than half of the bits in a binary vector are 1. It counts the number of 1s and returns 1 if the count is greater than half the length of the vector, and 0 otherwise.
+
+4. `test_parity()`: This function checks if the number of 1s in a binary vector is odd. It counts the number of 1s and returns the remainder when the count is divided by 2.
+
+5. `perceptron_learning()`: This is the main learning function. It performs a specified number of steps of the learning algorithm. For each step, it generates a random input vector, calculates the output and the desired output, and adjusts the weights if the output does not match the desired output. The adjustment is done according to the perceptron learning rule, which involves adding the product of the learning rate, the difference between the desired and actual output, and the input to the weights.
+
+6. `perceptron_testing()`: This function tests the performance of the perceptron. It generates a random input vector, calculates the output and the desired output, and increments a counter if the output matches the desired output. It returns the success rate, which is the ratio of the number of successful matches to the total number of tests.
+
+The `main()` function sets up the initial conditions, including the number of input bits, the weight vector, and the learning rate. It then runs the learning and testing functions in a loop, printing the error rate every 100 runs. After all runs are complete, it prints the final weights. The perceptron can be set to learn either the majority function or the parity function by uncommenting the appropriate line.
+
+--------------------------------
+
+Majority Function: The majority function returns true (or 1) if more than half of the inputs are true (or 1), and false (or 0) otherwise. This function is often used in voting systems or consensus protocols, where a decision is made based on the majority of votes. It's also used in error detection and correction codes, where the majority vote can help determine the correct value if some bits are corrupted.
+
+Parity Function: The parity function returns true (or 1) if the number of true inputs is odd, and false (or 0) if the number of true inputs is even. This function is commonly used in error detection in computer systems, particularly in parity bits or parity checks. If data is transmitted with a parity bit, the receiver can use the parity function to check whether the data was corrupted during transmission.
+
+The majority function can be learned by a single-layer perceptron (a simple model of a neuron), while the parity function requires a multi-layer perceptron (a more complex model that can represent more complex functions).
+
+The parity function is a type of problem that is not linearly separable, meaning there is no straight line (or hyperplane in higher dimensions) that can separate the inputs into two classes (odd parity and even parity). 
+
+A single-layer perceptron is a linear classifier, which means it can only learn linearly separable functions. It works by finding a hyperplane that separates the input space into two half-spaces. Each of these half-spaces corresponds to one of the two possible output classes. If such a hyperplane exists, the function is said to be linearly separable, and a single-layer perceptron can learn it.
+However, the parity function is not linearly separable. No matter how you try to draw a line through the input space, you can't separate the inputs with odd parity from those with even parity. This is why a single-layer perceptron can't learn the parity function.
+A multi-layer perceptron (MLP), on the other hand, can learn non-linearly separable functions. An MLP consists of multiple layers of neurons, and each layer can transform the input space in a way that makes the function linearly separable in the transformed space. This is why an MLP can learn the parity function.
+
+The parity function is a type of problem that is not linearly separable, meaning there is no straight line (or hyperplane in higher dimensions) that can separate the inputs into two classes (odd parity and even parity). 
+
+A single-layer perceptron is a linear classifier, which means it can only learn linearly separable functions. It works by finding a hyperplane that separates the input space into two half-spaces. Each of these half-spaces corresponds to one of the two possible output classes. If such a hyperplane exists, the function is said to be linearly separable, and a single-layer perceptron can learn it.
+
+However, the parity function is not linearly separable. No matter how you try to draw a line through the input space, you can't separate the inputs with odd parity from those with even parity. This is why a single-layer perceptron can't learn the parity function.
+A multi-layer perceptron (MLP), on the other hand, can learn non-linearly separable functions. An MLP consists of multiple layers of neurons, and each layer can transform the input space in a way that makes the function linearly separable in the transformed space. This is why an MLP can learn the parity function.
+
+A multi-layer perceptron (MLP), on the other hand, can learn non-linearly separable functions. An MLP consists of multiple layers of neurons, and each layer can transform the input space in a way that makes the function linearly separable in the transformed space. This is why an MLP can learn the parity function.
+----------------------------------

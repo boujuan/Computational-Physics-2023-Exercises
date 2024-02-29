@@ -37,7 +37,7 @@ int output_neuron(int L, int *x, double *w)
 }
 
 
-
+// INFO: Generate random training data
 /********************* random_vector() ******************/
 /** Generates a random 0/1 vector 'x' of length 'L'    **/
 /** for entries (1..L)                                 **/

@@ -6,7 +6,7 @@ set output 'pt_plot.png'
 
 # Set the labels for the axes
 set xlabel 'sweep number'
-set ylabel 'p'
+set ylabel 'm(t)'
 
 # set xrange []
 

@@ -214,6 +214,9 @@ int main(int argc, char** argv) // Arguments: -p 0.5 -T 2 1.0 3.0 -up -seed 1000
     fclose(file);
   }
 
+  // INFO: DATA BEING SAVED: 1. command line arguments, 2. number of clusters, 3. ID of the largest cluster, 4. size of the largest cluster, 
+  // Each sweep: 1. sweep number (time step),for each temperature: 3. energy, 4. magnetisation, 5. magnetisation of the largest clusters
+
   fprintf(stderr, "# statistics of acceptances rates:\n");
   for(t=0; t<num_T-1; t++)
     fprintf(stderr, "#[T_%d,T_%d]=[%f,%f]: %f\n", t, t+1, T[t], T[t+1],

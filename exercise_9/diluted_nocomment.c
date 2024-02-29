@@ -25,31 +25,7 @@
 /***************************************************************/
 void diluted_PT(int num_T, short int **spin_cfg, int num_n, int N, int *next, short int *e, double *T, int *exch, int *tries)
 {
-  int k, mc_steps = 1000; // Define the number of Monte Carlo steps
-  double delta, r;
-
-  // Perform Monte Carlo algorithm for each temperature configuration
-  for (k = 0; k < num_T; k++) {
-    diluted_mc_T(spin_cfg[k], num_n, N, next, e, mc_steps, T[k]);
-  }
-
-  // Attempt to swap neighboring configurations
-  for (k = 0; k < num_T - 1; k++) {
-    double E1 = diluted_energy(spin_cfg[k], num_n, N, next, e);
-    double E2 = diluted_energy(spin_cfg[k+1], num_n, N, next, e);
-
-    delta = (1.0/T[k] - 1.0/T[k+1]) * (E2 - E1);
-    r = r_0_1();
-
-    // If delta < 0 or r < exp(-delta), accept the swap
-    if (delta < 0 || r < exp(-delta)) {
-      short int *temp = spin_cfg[k];
-      spin_cfg[k] = spin_cfg[k+1];
-      spin_cfg[k+1] = temp;
-      exch[k]++; // Increment the count of successful swaps
-    }
-    tries[k]++; // Increment the count of attempted swaps
-  }
+  
 }
 
 double r_0_1()

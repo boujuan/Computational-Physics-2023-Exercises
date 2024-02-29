@@ -56,11 +56,11 @@ void diluted_PT(int num_T, short int **spin_cfg, int num_n, int N, int *next, sh
     double E1 = diluted_energy(spin_cfg[k], num_n, N, next, e);
     double E2 = diluted_energy(spin_cfg[k+1], num_n, N, next, e);
 
-    delta = (1.0/T[k] - 1.0/T[k+1]) * (E2 - E1);
-    r = r_0_1();
+    delta = (1.0/T[k] - 1.0/T[k+1]) * (E2 - E1); // difference in inverse temperatures by difference in energy
+    r = r_0_1();  // random number in [0,1)
 
-    // If delta < 0 or r < exp(-delta), accept the swap
-    if (delta < 0 || r < exp(-delta)) {
+    // If delta < 0 or r < exp(-delta), accept the swap of the spin configurations using the Metropolis algorithm
+    if (delta < 0 || r < exp(-delta)) { // Acceptance criteria. If the energy difference is negative or the random number is less than the Boltzmann factor, accept the swap
       short int *temp = spin_cfg[k];
       spin_cfg[k] = spin_cfg[k+1];
       spin_cfg[k+1] = temp;

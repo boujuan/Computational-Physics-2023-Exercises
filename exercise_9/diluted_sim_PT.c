@@ -19,7 +19,7 @@ extern void diluted_PT(int num_T, short int **spin, int num_n, int N,
 		       int *next,  short int *e, double *T, 
 		       int *exch, int *tries);
 
-int main(int argc, char** argv)
+int main(int argc, char** argv) // Arguments: -p 0.5 -T 2 1.0 3.0 -up -seed 10000 10 1000
 {
   int dim;                                          /* dimension of system */
   int num_n;                             /* number of neighbors in lattice */
@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 
   while((argz<argc)&&(argv[argz][0] == '-'))              /* treat options */
   {
-    if(strcmp(argv[argz], "-p") == 0)
+    if(strcmp(argv[argz], "-p") == 0) // -p is argument for the probability of having a hole
     {
       sscanf(argv[++argz], "%lf", &p_hole);
     }
@@ -71,27 +71,27 @@ int main(int argc, char** argv)
     }
     else if(strcmp(argv[argz], "-up") == 0)
     {
-      do_up = 1;
+      do_up = 1;  // -up is a flag to start with all spins aligned
     }
     else if(strcmp(argv[argz], "-seed") == 0)
     {
-      sscanf(argv[++argz], "%d", &seed);
+      sscanf(argv[++argz], "%d", &seed); // -seed is the seed of the generator for the simulation part
     }
     else if(strcmp(argv[argz], "-real") == 0)
     {
-      sscanf(argv[++argz], "%d", &real_id0);
+      sscanf(argv[++argz], "%d", &real_id0); // -real is the seed of the generator for the simulation part
     }
     else if(strcmp(argv[argz], "-num") == 0)
     {
-      sscanf(argv[++argz], "%d", &num_real);
+      sscanf(argv[++argz], "%d", &num_real); // -num is the number of realisations
     }
     else if(strcmp(argv[argz], "-stdout") == 0)
     {
-      do_stdout = 1;
+      do_stdout = 1; // -stdout is a flag to write output to stdout
     }
     else if(strcmp(argv[argz], "-appendix") == 0)
     {
-      strcpy(appendix, argv[++argz]);
+      strcpy(appendix, argv[++argz]); // -appendix is the appendix for the output filename
     }
     else
     {
@@ -116,8 +116,8 @@ int main(int argc, char** argv)
     fprintf(stderr, "      -stdout: write output to stdout\n");
     exit(1);
   }
-  size = atoi(argv[argz++]);
-  num_sweeps = atoi(argv[argz++]);
+  size = atoi(argv[argz++]); // argument for the size of the system <L>
+  num_sweeps = atoi(argv[argz++]); // argument for the number of sweeps <#sweeps>
 
   l = (int *) malloc(dim*sizeof(int));     /* allocations/ intializations */
   l[0] = size;

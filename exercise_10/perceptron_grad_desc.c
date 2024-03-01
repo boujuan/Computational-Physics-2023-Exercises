@@ -140,7 +140,7 @@ void perceptron_learning(int L, double *w, double epsilon,
   int y, y_wanted;                              
   double gradient;                              
   double prev_gradient = 1e9; // Initialize prev_gradient to a large value
-  double threshold = 0.0001; // Threshold for convergence
+  double threshold = 0.01; // Threshold for convergence
   int max_iterations = 2000000; // Maximum number of iterations
 
   x = (int *) malloc( (L+1)*sizeof(int)); 

@@ -189,8 +189,8 @@ int main(int argc, char **argv)
   int *x;                                                      /* input */
   int run, t;                                          /* loop counters */
   int (*function)(int, int*);
-  /*function = test_majority;*/ 
-  function = test_parity;
+  function = test_majority; 
+  // function = test_parity;
 
 
   w = (double *) malloc((L+1)*sizeof(double));

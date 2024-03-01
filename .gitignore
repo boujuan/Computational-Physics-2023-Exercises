@@ -17,3 +17,6 @@ exercise_6/*.png
 exercise_6/*.dat
 exercise_6/*.gp
 exercise_9/diluted_nocomment.c
+exercise_10/majority/feed_forward__2_4_1000000.png
+parity
+majority

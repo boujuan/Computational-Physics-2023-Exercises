@@ -41,8 +41,11 @@ void diluted_PT(int num_T, short int **spin_cfg, int num_n, int N, int *next, sh
     diluted_mc_T(spin_cfg[k], num_n, N, next, e, mc_steps, T[k]);
   }
 
-  // Attempt to swap neighboring configurations
-  for (k = 0; k < num_T - 1; k++) {
+
+  // Attempt to swap randomly two neighboring configurations
+  for (int i = 0; i < num_T - 1; i++) {
+    k = r_0_1() * (num_T - 1); // Randomly choose k
+
     double E1 = diluted_energy(spin_cfg[k], num_n, N, next, e);
     double E2 = diluted_energy(spin_cfg[k+1], num_n, N, next, e);
 

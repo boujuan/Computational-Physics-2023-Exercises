@@ -20,5 +20,5 @@ file = 'dPTL20p0.00ID1000.out'
 
 # Plot the data from the files
 plot file using 1:3 with lines title 'T1', \
-    file using 1:6 with lines title 'T2', \
-    file using 1:9 with lines title 'T3'
+    file using 1:24 with lines title 'T2', \
+    file using 1:36 with lines title 'T3'
